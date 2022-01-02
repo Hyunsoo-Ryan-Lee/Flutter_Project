@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/google_auth.dart';
+import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -14,16 +16,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Widget currentPage = Register();
+  AuthClass authClass = AuthClass();
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
+  void checkLogin() async {
+    String? token = await authClass.getToken();
+    if (token != null) {
+      setState(() {
+        currentPage = Home();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Firebase"),
-        ),
-        body: Register(),
-      ),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: currentPage);
   }
 }

@@ -19,6 +19,10 @@ class _RegisterState extends State<Register> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Main"),
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formkey,
