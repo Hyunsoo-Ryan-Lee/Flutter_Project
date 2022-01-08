@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/google_auth.dart';
+import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Register extends StatefulWidget {
@@ -20,7 +23,7 @@ class _RegisterState extends State<Register> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Main"),
+          title: Text("SIGN UP"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -64,6 +67,27 @@ class _RegisterState extends State<Register> {
                     }
                   },
                 ),
+                SizedBox(height: size.height * 0.01),
+                RichText(
+                  text: TextSpan(
+                    text: 'If you already signed in, click ',
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'LOGIN',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
+                            },
+                          style: TextStyle(
+                            color: Colors.blue,
+                          )),
+                      // TextSpan(text: 'text!'),
+                    ],
+                  ),
+                ),
                 SizedBox(height: size.height * 0.03),
                 Divider(),
                 ButtonItem("assets/google.svg", 'Google', 0.035),
@@ -80,10 +104,12 @@ class _RegisterState extends State<Register> {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
-      // var route = new MaterialPageRoute(
-      //     builder: (BuildContext context) => new selectSex(
-      //         txt: [_emailController.text, _passwordController.text]));
-      // Navigator.of(context).push(route);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => LoginPage()));
+      final snackBar = SnackBar(
+        content: const Text("You're signed up!"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         final snackBar = SnackBar(

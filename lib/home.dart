@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/google_auth.dart';
-import 'package:flutter_application_1/register.dart';
+import 'package:flutter_application_1/login_page.dart';
+import 'package:flutter_application_1/signin_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
             await authClass.logOut();
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (builder) => Register()),
+                MaterialPageRoute(builder: (builder) => LoginPage()),
                 (route) => false);
           },
           child: Text('LogOut'),
