@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -65,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      // _login(context);
-                      loginuser(context);
+                      _login(context);
+                      // loginuser(context);
                     }
                   },
                 ),
@@ -103,25 +104,31 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void loginuser(BuildContext context) async {
-    await FirebaseAuth.instance
-        .setPersistence(Persistence.NONE)
-        .then((value) => {
-              FirebaseAuth.instance
-                  .signInWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passwordController.text)
-                  .then(
-                      (UserCredential) => {(currentuser = UserCredential.user)})
-            });
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
-  }
+  // void loginuser(BuildContext context) async {
+  //   await FirebaseAuth.instance
+  //       .setPersistence(Persistence.NONE)
+  //       .then((value) => {
+  //             FirebaseAuth.instance
+  //                 .signInWithEmailAndPassword(
+  //                     email: _emailController.text,
+  //                     password: _passwordController.text)
+  //                 .then(
+  //                     (UserCredential) => {(currentuser = UserCredential.user)})
+  //           });
+  //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+  // }
 
   void _login(BuildContext context) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text, password: _passwordController.text);
-      // await FirebaseAuth.instance.setPersistence(Persistence.LOCAL).then((value) => null)
+      // await FirebaseAuth.instance
+      //     .setPersistence(Persistence.SESSION)
+      //     .whenComplete(() => FirebaseAuth.instance.signInWithEmailAndPassword(
+      //         email: _emailController.text,
+      //         password: _passwordController.text));
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text)
+          .then((value) => print('오호라'));
       final snackBar = SnackBar(
         content: const Text("You're logged in!"),
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/google_auth.dart';
+import 'package:flutter_application_1/google_map.dart';
 import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/signin_page.dart';
 
@@ -24,15 +25,28 @@ class _HomeState extends State<Home> {
           title: Text("Home"),
           centerTitle: true,
         ),
-        body: OutlinedButton(
-          onPressed: () async {
-            await authClass.logOut();
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (builder) => LoginPage()),
-                (route) => false);
-          },
-          child: Text('LogOut'),
+        body: Column(
+          children: [
+            OutlinedButton(
+              onPressed: () async {
+                await authClass.logOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (builder) => LoginPage()),
+                    (route) => false);
+              },
+              child: Text('LogOut'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => GoogleMapSearch()));
+                },
+                child: Text("Google Map"))
+          ],
         ),
       ),
     );

@@ -39,6 +39,16 @@ dependencies:
   flutter_svg: ^1.0.0
   google_sign_in: ^5.2.1
   flutter_secure_storage: 
+  kakao_flutter_sdk: ^0.9.0
+  dio: ^4.0.4
+  json_annotation: ^4.4.0
+  package_info: ^2.0.2
+  platform: ^3.1.0
+  shared_preferences: ^2.0.11
+  flutter_polyline_points: ^1.0.0
+  google_maps_flutter: ^2.1.1
+  geolocator: ^8.0.1
+
 
 dev_dependencies:
   flutter_test:

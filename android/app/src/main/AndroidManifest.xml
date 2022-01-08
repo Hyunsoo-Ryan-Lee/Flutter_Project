@@ -23,6 +23,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <data android:scheme="kakao6f1078e092ca14c60168aec194eb6bef" android:host='oauth'/>
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
@@ -30,5 +31,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name='com.google.android.geo.API_KEY'
+                android:value="AIzaSyDt88VE24pBdf5-KF5NhnL4a1bTLcZAaqc"/>
     </application>
 </manifest>

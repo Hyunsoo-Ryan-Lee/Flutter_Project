@@ -4,11 +4,13 @@ import 'package:flutter_application_1/google_auth.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/signin_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kakao_flutter_sdk/all.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+  KakaoContext.clientId = "6f1078e092ca14c60168aec194eb6bef";
+  KakaoContext.javascriptClientId = '7f252416a77dfa20889b312ecbe6c178';
   runApp(MyApp());
 }
 
