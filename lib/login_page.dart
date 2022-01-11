@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
                       _login(context);
-                      // loginuser(context);
                     }
                   },
                 ),
@@ -118,23 +117,25 @@ class _LoginPageState extends State<LoginPage> {
   //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
   // }
 
+  Future<dynamic> loginuser() =>
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+
   void _login(BuildContext context) async {
     try {
-      // await FirebaseAuth.instance
-      //     .setPersistence(Persistence.SESSION)
-      //     .whenComplete(() => FirebaseAuth.instance.signInWithEmailAndPassword(
-      //         email: _emailController.text,
-      //         password: _passwordController.text));
+      print('1');
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text)
-          .then((value) => print('오호라'));
+          .then((value) => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => Home())));
+      print('2');
       final snackBar = SnackBar(
         content: const Text("You're logged in!"),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Home()));
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         final snackBar = SnackBar(
